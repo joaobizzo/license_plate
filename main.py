@@ -10,12 +10,15 @@ license_plate_detector = YOLO('models/license_plate_recognizer.pt')
 cap = cv2.VideoCapture('cars.driving_1.mkv')
 
 # read frames
+frame_nmr = -1
 ret = True
 while ret:
-    ret, frames = cap.read()
-    if ret:
+    frame_nmr += 1
+    ret, frame = cap.read()
+    if ret and frame_nmr < 10:
         pass
         # detect vehicles
+        detections = coco_model(frame)[0]
 
         # track vehicles
 
