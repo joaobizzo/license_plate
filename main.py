@@ -19,6 +19,7 @@ while ret:
         pass
         # detect vehicles
         detections = coco_model(frame)[0]
+        print(detections)
 
         # track vehicles
 
