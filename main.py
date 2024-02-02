@@ -20,7 +20,8 @@ while ret:
         pass
         # detect vehicles
         detections = coco_model(frame)[0]
-        print(detections)
+        for detection in detections.boxes.data.tolist():
+            print(detection)
         
         # track vehicles
 
