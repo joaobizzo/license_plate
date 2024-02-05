@@ -3,6 +3,8 @@ import cv2
 
 from sort.sort import *
 
+from util import get_car
+
 mot_tracker = Sort()
 
 # load models
@@ -44,8 +46,10 @@ while ret:
             
 
         # assign license plates to car
+        xcar1, ycar2, xcar2, ycar2, car_id = get_car(license_plate, track_ids)
 
         # crop license plate
+        license_plate_crop = frame[int(y1):int(y2), int(x1):int(x2)]
 
         # process license plate
 
