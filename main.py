@@ -21,7 +21,7 @@ while ret:
         # detect vehicles
         detections = coco_model(frame)[0]
         for detection in detections.boxes.data.tolist():
-            print(detection)
+            x1, y1, x2, y2, score, class_id = detection
         
         # track vehicles
 
