@@ -26,9 +26,10 @@ while ret:
         for detection in detections.boxes.data.tolist():
             x1, y1, x2, y2, score, class_id = detection
             if int(class_id) in vehicles:
-                pass
+                detections_.append([x1, y1, x2, y2, score])
         
         # track vehicles
+                
 
         # detecd license plates
 
