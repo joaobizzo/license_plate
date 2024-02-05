@@ -29,6 +29,7 @@ while ret:
                 detections_.append([x1, y1, x2, y2, score])
         
         # track vehicles
+        
                 
 
         # detecd license plates
