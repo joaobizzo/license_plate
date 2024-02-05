@@ -1,6 +1,9 @@
 from ultralytics import YOLO
 import cv2
 
+from sort.sort import *
+
+mot_tracker = Sort()
 
 # load models
 coco_model = YOLO('yolov8n.pt')
@@ -29,10 +32,16 @@ while ret:
                 detections_.append([x1, y1, x2, y2, score])
         
         # track vehicles
-        
+        track_ids = mot_tracker.update(np.asarray(detections_))
                 
 
         # detecd license plates
+        license_plates = detections = license_plate_detector(frame)[0]
+        for license_plate in license_plates.boxes.data.tolist():
+            x1, y1, x2, y2, score, class_id = license_plate
+           
+
+            
 
         # assign license plates to car
 
