@@ -88,7 +88,12 @@ while ret:
 
 # Stop timing and print elapsed time
 elapsed_time = time.time() - start_time
-print(f"Processing completed in {elapsed_time:.2f} seconds.")
+minutes = int(elapsed_time // 60)
+seconds = int(elapsed_time % 60)
+if minutes > 0:
+    print(f"Processing completed in {minutes} minutes and {seconds} seconds.")
+else:
+    print(f"Processing completed in {seconds} seconds.")
 print("Video processing successful and saved to file.")
 
 out.release()
