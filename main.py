@@ -61,7 +61,7 @@ while ret:
         _, license_plate_crop_tresh = cv2.threshold(license_plate_crop_gray, 64, 255, cv2.THRESH_BINARY_INV)
 
         # read license plate number
-        license_plate_text, license_plate_text_score = read_license_plate()
+        license_plate_text, license_plate_text_score = read_license_plate(license_plate_crop_tresh)
 
         if license_plate_text is not None:
             results[frame_nmr][car_id] = {'car': {'bbox': [xcar1, ycar2, xcar2, ycar2]},

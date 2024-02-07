@@ -58,7 +58,7 @@ def write_csv(results, output_path):
         f.close()
 
 
-def read_license_plate(license_plate_crop_tresh):
+def read_license_plate(license_plate_crop):
 
     return 0, 0
 
