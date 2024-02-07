@@ -3,7 +3,7 @@ import cv2
 
 from sort.sort import *
 
-from util import get_car, read_license_plate
+from util import get_car, read_license_plate, write_csv
 
 
 results = {}
@@ -71,4 +71,5 @@ while ret:
                                                             'text_score': license_plate_text_score}
                                           }
 
-        # write results
+# write results
+write_csv(results, './test.csv')
