@@ -58,7 +58,32 @@ def write_csv(results, output_path):
         f.close()
 
 
-def license_complies_format(text):
+def license_complies_BR_format(text):
+    """
+    Check if the license plate text complies with the required format.
+
+    Args:
+        text (str): License plate text.
+
+    Returns:
+        bool: True if the license plate complies with the format, False otherwise.
+    """
+    if len(text) != 7:
+        return False
+
+    if (text[0] in string.ascii_uppercase or text[0] in dict_int_to_char.keys()) and \
+       (text[1] in string.ascii_uppercase or text[1] in dict_int_to_char.keys()) and \
+       (text[2] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] or text[2] in dict_char_to_int.keys()) and \
+       (text[3] in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] or text[3] in dict_char_to_int.keys()) and \
+       (text[4] in string.ascii_uppercase or text[4] in dict_int_to_char.keys()) and \
+       (text[5] in string.ascii_uppercase or text[5] in dict_int_to_char.keys()) and \
+       (text[6] in string.ascii_uppercase or text[6] in dict_int_to_char.keys()):
+        return True
+    else:
+        return False
+    
+
+def license_complies_UK_format(text):
     """
     Check if the license plate text complies with the required format.
 
@@ -105,7 +130,7 @@ def format_license(text):
     return license_plate_
 
 
-def read_license_plate(license_plate_crop):
+def read_license_plate(license_plate_crop, country):
     """
     Read the license plate text from the given cropped image.
 
@@ -115,6 +140,12 @@ def read_license_plate(license_plate_crop):
     Returns:
         tuple: Tuple containing the formatted license plate text and its confidence score.
     """
+
+    if country == 'BR':
+        license_complies_format = license_complies_BR_format
+    elif country == 'UK':
+        license_complies_format = license_complies_UK_format
+
 
     detections = reader.readtext(license_plate_crop)
 
