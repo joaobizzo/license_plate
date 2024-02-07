@@ -28,7 +28,9 @@ while ret:
     frame_nmr += 1
 
     ret, frame = cap.read()
-    if ret and frame_nmr < 10:
+    if ret:
+        if frame_nmr < 10:
+            break
         results[frame_nmr] = {}
         # detect vehicles
         detections = coco_model(frame)[0]
