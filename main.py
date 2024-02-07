@@ -29,8 +29,8 @@ while ret:
 
     ret, frame = cap.read()
     if ret:
-        if frame_nmr < 10:
-            break
+        #if frame_nmr < 10: #remove to process all video
+        #   break
         results[frame_nmr] = {}
         # detect vehicles
         detections = coco_model(frame)[0]
