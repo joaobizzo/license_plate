@@ -82,6 +82,7 @@ def license_complies_format(text):
     else:
         return False
 
+
 def format_license(text):
     """
     Format the license plate text by converting characters using the mapping dictionaries.
@@ -103,6 +104,7 @@ def format_license(text):
 
     return license_plate_
 
+
 def read_license_plate(license_plate_crop):
 
     """
@@ -121,7 +123,7 @@ def read_license_plate(license_plate_crop):
         bbox, text, score = detection
 
 
-        text.upper().remove(' ', '')
+        text.upper().replace(' ', '')
 
         if license_complies_format(text):
             return license_complies_format(text), score
