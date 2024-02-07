@@ -16,7 +16,7 @@ license_plate_recognizer_path = "../../../MODELS/license_plate_detector.pt"
 license_plate_detector = YOLO(license_plate_recognizer_path)
 
 # load video
-cap = cv2.VideoCapture('cars-driving_1.mkv')
+cap = cv2.VideoCapture('../data/sample.mp4')
 
 vehicles = [2, 3, 5, 7]  # car, bus, truck, motorbike
 
