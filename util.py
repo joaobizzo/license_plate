@@ -106,7 +106,6 @@ def format_license(text):
 
 
 def read_license_plate(license_plate_crop):
-
     """
     Read the license plate text from the given cropped image.
 
@@ -122,8 +121,7 @@ def read_license_plate(license_plate_crop):
     for detection in detections:
         bbox, text, score = detection
 
-
-        text.upper().replace(' ', '')
+        text = text.upper().replace(' ', '')
 
         if license_complies_format(text):
             return format_license(text), score
@@ -131,7 +129,7 @@ def read_license_plate(license_plate_crop):
     return None, None
 
 
-def get_car(license_plate, vehicle_track_id):
+def get_car(license_plate, vehicle_track_ids):
     """
     Retrieve the vehicle coordinates and ID based on the license plate coordinates.
 
@@ -142,22 +140,18 @@ def get_car(license_plate, vehicle_track_id):
     Returns:
         tuple: Tuple containing the vehicle coordinates (x1, y1, x2, y2) and ID.
     """
-
-
-
-    foundIt = False
     x1, y1, x2, y2, score, class_id = license_plate
 
-    for j in range(len(vehicle_track_id)):
-        xcar1, ycar1, xcar2, ycar2, car_id = vehicle_track_id[j]
+    foundIt = False
+    for j in range(len(vehicle_track_ids)):
+        xcar1, ycar1, xcar2, ycar2, car_id = vehicle_track_ids[j]
 
         if x1 > xcar1 and y1 > ycar1 and x2 < xcar2 and y2 < ycar2:
             car_indx = j
             foundIt = True
             break
-    
+
     if foundIt:
-        return vehicle_track_id[car_indx]
-             
+        return vehicle_track_ids[car_indx]
 
     return -1, -1, -1, -1, -1
