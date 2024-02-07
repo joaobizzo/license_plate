@@ -9,7 +9,8 @@ mot_tracker = Sort()
 
 # load models
 coco_model = YOLO('yolov8n.pt')
-license_plate_detector = YOLO('models/license_plate_recognizer.pt')
+license_plate_recognizer_path = "../../../MODELS/license_plate_detector.pt"
+license_plate_detector = YOLO(license_plate_recognizer_path)
 
 # load video
 cap = cv2.VideoCapture('cars-driving_1.mkv')
