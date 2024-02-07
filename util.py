@@ -60,6 +60,17 @@ def write_csv(results, output_path):
 
 def read_license_plate(license_plate_crop):
 
+    """
+    """
+
+    detections = reader.readtext(license_plate_crop)
+
+    for detection in detections:
+        bbox, text, score = detection
+
+
+        text.upper().remove(' ', '')
+
     return 0, 0
 
 
