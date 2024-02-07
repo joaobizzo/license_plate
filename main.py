@@ -5,6 +5,9 @@ from sort.sort import *
 
 from util import get_car, read_license_plate
 
+
+results = {}
+
 mot_tracker = Sort()
 
 # load models
@@ -23,9 +26,10 @@ frame_nmr = -1
 ret = True
 while ret:
     frame_nmr += 1
+
     ret, frame = cap.read()
     if ret and frame_nmr < 10:
-        pass
+        results[frame_nmr] = {}
         # detect vehicles
         detections = coco_model(frame)[0]
         detections_ = []
@@ -57,6 +61,8 @@ while ret:
         _, license_plate_crop_tresh = cv2.threshold(license_plate_crop_gray, 64, 255, cv2.THRESH_BINARY_INV)
 
         # read license plate number
+        license_plate_text, license_plate_text_score = read_license_plate()
 
+        
 
         # write results
