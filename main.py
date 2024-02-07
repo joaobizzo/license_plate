@@ -3,7 +3,7 @@ import cv2
 
 from sort.sort import *
 
-from util import get_car
+from util import get_car, read_license_plate
 
 mot_tracker = Sort()
 
@@ -56,11 +56,7 @@ while ret:
         license_plate_crop_gray = cv2.cvtColor(license_plate_crop, cv2.COLOR_BGR2GRAY)
         _, license_plate_crop_tresh = cv2.threshold(license_plate_crop_gray, 64, 255, cv2.THRESH_BINARY_INV)
 
-        cv2.imshow('original_crop', license_plate_crop)
-        cv2.imshow('treshold_crop', license_plate_crop_tresh)
-
-        cv2.waitKey(0)
-
         # read license plate number
+
 
         # write results
