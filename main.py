@@ -63,6 +63,12 @@ while ret:
         # read license plate number
         license_plate_text, license_plate_text_score = read_license_plate()
 
-        
+        if license_plate_text is not None:
+            results[frame_nmr][car_id] = {'car': {'bbox': [xcar1, ycar2, xcar2, ycar2]},
+                                          'license_plate': {'bbox': [x1, y1, x2, y2],
+                                                            'text': license_plate_text,
+                                                            'bbox_score': score,
+                                                            'text_score': license_plate_text_score}
+                                          }
 
         # write results
