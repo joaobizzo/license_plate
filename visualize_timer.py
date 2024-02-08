@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import pandas as pd
 import time  # Import the time module
+import os
 
 def draw_border(img, top_left, bottom_right, color=(0, 255, 0), thickness=10, line_length_x=200, line_length_y=200):
     x1, y1 = top_left
@@ -85,6 +86,8 @@ while ret:
                 print(f"Error processing frame: {e}")
 
         out.write(frame)
+        os.system('clear')
+        print(f"Frame {frame_nmr} processed.")
 
 # Stop timing and print elapsed time
 elapsed_time = time.time() - start_time
