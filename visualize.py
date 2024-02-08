@@ -46,14 +46,14 @@ def processing_animation(i):
 results = pd.read_csv('./test_interpolated.csv')
 
 # Setup video capture and writer
-video_path = '../data/sample.mp4'
+video_path = '../data/UK1/sample.mp4'
 cap = cv2.VideoCapture(video_path)
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 fps = cap.get(cv2.CAP_PROP_FPS)
 frames = cap.get(cv2.CAP_PROP_FRAME_COUNT) 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-out = cv2.VideoWriter('../data/out.mp4', fourcc, fps, (width, height))
+out = cv2.VideoWriter('../data/UK1/out.mp4', fourcc, fps, (width, height))
 
 # calculate duration of the video 
 seconds = round(frames / fps)
