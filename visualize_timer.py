@@ -6,6 +6,7 @@ import time  # Import the time module
 import os
 
 border_color = (116, 226, 145)
+rectangle_color = (255, 0, 77)
 
 
 def draw_border(img, top_left, bottom_right, color=(255, 0, 0), thickness=6, line_length_x=180, line_length_y=180):
@@ -80,7 +81,7 @@ while ret:
             draw_border(frame, (int(car_x1), int(car_y1)), (int(car_x2), int(car_y2)), border_color, 16, line_length_x=170, line_length_y=170)
 
             x1, y1, x2, y2 = ast.literal_eval(df_.iloc[row_indx]['license_plate_bbox'].replace('[ ', '[').replace('   ', ' ').replace('  ', ' ').replace(' ', ','))
-            cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 12)
+            cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), rectangle_color, 10)
 
             license_crop = license_plate[df_.iloc[row_indx]['car_id']]['license_crop']
 
