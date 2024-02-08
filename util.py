@@ -11,6 +11,11 @@ import csv
 import numpy as np
 from scipy.interpolate import interp1d
 
+import sys
+import tkinter as tk
+from tkinter import filedialog
+
+
 # Initialize the OCR reader
 reader = easyocr.Reader(['en'], gpu=False)
 
@@ -41,6 +46,19 @@ br_int_to_char = {'0': 'A',
                     '7': 'H',
                     '8': 'I', # 8 is definitely I
                     '9': 'J'}
+
+
+def choose_folder():
+    root = tk.Tk()
+    root.withdraw()  # Oculta a janela principal
+
+    folder_path = filedialog.askdirectory()  # Abre o seletor de diretórios
+
+    if folder_path:
+        return folder_path
+    else:
+        sys.exit(0)
+
 
 
 def clear():
