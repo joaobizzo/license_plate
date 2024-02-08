@@ -5,7 +5,10 @@ import pandas as pd
 import time  # Import the time module
 import os
 
-def draw_border(img, top_left, bottom_right, color=(0, 255, 0), thickness=10, line_length_x=200, line_length_y=200):
+border_color = (116, 226, 145)
+
+
+def draw_border(img, top_left, bottom_right, color=(255, 0, 0), thickness=6, line_length_x=180, line_length_y=180):
     x1, y1 = top_left
     x2, y2 = bottom_right
 
@@ -31,11 +34,16 @@ video_path = '../data/sample.mp4'
 cap = cv2.VideoCapture(video_path)
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 fps = cap.get(cv2.CAP_PROP_FPS)
+frames = cap.get(cv2.CAP_PROP_FRAME_COUNT) 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 out = cv2.VideoWriter('../data/out.mp4', fourcc, fps, (width, height))
 
+# calculate duration of the video 
+seconds = round(frames / fps)
+
 license_plate = {}
+print("Processing license plates...")
 for car_id in np.unique(results['car_id']):
     max_ = np.amax(results[results['car_id'] == car_id]['license_number_score'])
     license_plate[car_id] = {
@@ -52,6 +60,8 @@ for car_id in np.unique(results['car_id']):
 
     license_plate[car_id]['license_crop'] = license_crop
 
+
+
 frame_nmr = -1
 cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
 
@@ -67,7 +77,7 @@ while ret:
         df_ = results[results['frame_nmr'] == frame_nmr]
         for row_indx in range(len(df_)):
             car_x1, car_y1, car_x2, car_y2 = ast.literal_eval(df_.iloc[row_indx]['car_bbox'].replace('[ ', '[').replace('   ', ' ').replace('  ', ' ').replace(' ', ','))
-            draw_border(frame, (int(car_x1), int(car_y1)), (int(car_x2), int(car_y2)), (0, 255, 0), 25, line_length_x=200, line_length_y=200)
+            draw_border(frame, (int(car_x1), int(car_y1)), (int(car_x2), int(car_y2)), border_color, 16, line_length_x=170, line_length_y=170)
 
             x1, y1, x2, y2 = ast.literal_eval(df_.iloc[row_indx]['license_plate_bbox'].replace('[ ', '[').replace('   ', ' ').replace('  ', ' ').replace(' ', ','))
             cv2.rectangle(frame, (int(x1), int(y1)), (int(x2), int(y2)), (0, 0, 255), 12)
@@ -85,9 +95,17 @@ while ret:
             except Exception as e:
                 print(f"Error processing frame: {e}")
 
+        
         out.write(frame)
+        percent = frame_nmr / frames * 100
+        time_left = 100 - percent * seconds
+        min = int(time_left // 60)
+        sec = int(time_left % 60)
+        
+        
         os.system('clear')
-        print(f"Frame {frame_nmr} processed.")
+        print(f" {percent:.2f}% processed.")
+        print(f"Aproximately {min} minutes and {sec} seconds left.")
 
 # Stop timing and print elapsed time
 elapsed_time = time.time() - start_time
