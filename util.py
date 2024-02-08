@@ -15,6 +15,9 @@ import sys
 import tkinter as tk
 from tkinter import filedialog
 
+import ast
+import time
+
 import pandas as pd
 
 
@@ -62,8 +65,15 @@ def choose_folder():
         sys.exit(0)
 
 
+def processing_animation(i):
+    j = i % 4
+    clear()
+    print(f"Processing license plates{'.' * j}")
+    #time.sleep(0.4)
+
 def clear():
     os.system('clear')
+
 
 def write_csv(results, output_path):
     """

@@ -1,10 +1,8 @@
-import ast
-import cv2
-import numpy as np
-import pandas as pd
-import time  # Import the time module
-from os import system
-from util import clear
+from util import *
+
+
+data_path = input()
+
 
 def rgb_to_bgr(rgb):
     return (rgb[2], rgb[1], rgb[0])
@@ -33,24 +31,20 @@ def draw_border(img, top_left, bottom_right, color=(255, 0, 0), thickness=6, lin
     return img
 
 
-def processing_animation(i):
-    j = i % 4
-    clear()
-    print(f"Processing license plates{'.' * j}")
-    #time.sleep(0.4)
+csv_path = os.path.join(data_path, 'test_interpolated.csv')
 
 # Load the data
-results = pd.read_csv('./test_interpolated.csv')
+results = pd.read_csv(csv_path)
 
 # Setup video capture and writer
-video_path = '../data/UK1/sample.mp4'
+video_path = os.path.join(data_path, 'sample.mp4')
 cap = cv2.VideoCapture(video_path)
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 fps = cap.get(cv2.CAP_PROP_FPS)
 frames = cap.get(cv2.CAP_PROP_FRAME_COUNT) 
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-out = cv2.VideoWriter('../data/UK1/out.mp4', fourcc, fps, (width, height))
+out = cv2.VideoWriter(os.path.join(data_path, 'out.mp4'), fourcc, fps, (width, height))
 
 # calculate duration of the video 
 seconds = round(frames / fps)
