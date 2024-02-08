@@ -3,10 +3,18 @@ import cv2
 import numpy as np
 import pandas as pd
 import time  # Import the time module
-import os
+from os import system
+
+
+def clear():
+    system('clear')
+
+def rgb_to_bgr(rgb):
+    return (rgb[2], rgb[1], rgb[0])
 
 border_color = (116, 226, 145)
-rectangle_color = (255, 0, 77)
+
+rectangle_color = rgb_to_bgr(255, 0, 77)
 
 
 def draw_border(img, top_left, bottom_right, color=(255, 0, 0), thickness=6, line_length_x=180, line_length_y=180):
@@ -28,11 +36,11 @@ def draw_border(img, top_left, bottom_right, color=(255, 0, 0), thickness=6, lin
     return img
 
 
-def processing_animation():
-    for i in range(4):
-        os.system('clear')
-        print(f"Processing{'.' * i}")
-        time.sleep(0.5)
+def processing_animation(i):
+    j = i % 4
+    clear()
+    print(f"Processing license plates{'.' * j}")
+    #time.sleep(0.4)
 
 # Load the data
 results = pd.read_csv('./test_interpolated.csv')
@@ -51,6 +59,7 @@ out = cv2.VideoWriter('../data/out.mp4', fourcc, fps, (width, height))
 seconds = round(frames / fps)
 
 license_plate = {}
+i=0
 for car_id in np.unique(results['car_id']):
     max_ = np.amax(results[results['car_id'] == car_id]['license_number_score'])
     license_plate[car_id] = {
@@ -66,7 +75,8 @@ for car_id in np.unique(results['car_id']):
     license_crop = cv2.resize(license_crop, (int((x2 - x1) * 400 / (y2 - y1)), 400))
 
     license_plate[car_id]['license_crop'] = license_crop
-    processing_animation()
+    processing_animation(i)
+    i+=1
 
 
 
@@ -111,19 +121,22 @@ while ret:
         sec = int(time_left % 60)
         
         
-        os.system('clear')
+        clear()
         print(f" {percent:.2f}% processed.")
-        print(f"Aproximately {min} minutes and {sec} seconds left.")
-
+        if min > 0:
+            print(f"{min} minutes and {sec} seconds of the video left to process")
+        else:
+            print(f"{sec} seconds of the video left to process.")
+clear()
 # Stop timing and print elapsed time
 elapsed_time = time.time() - start_time
 minutes = int(elapsed_time // 60)
 seconds = int(elapsed_time % 60)
 if minutes > 0:
-    print(f"Processing completed in {minutes} minutes and {seconds} seconds.")
+    print(f"100% processed in {minutes} minutes and {seconds} seconds.")
 else:
-    print(f"Processing completed in {seconds} seconds.")
-print("Video processing successful and saved to file.")
+    print(f"100% processed completed in {seconds} seconds.")
+print("Video output successfuly saved to file.")
 
 out.release()
 cap.release()
