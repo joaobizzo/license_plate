@@ -132,10 +132,11 @@ clear()
 elapsed_time = time.time() - start_time
 minutes = int(elapsed_time // 60)
 seconds = int(elapsed_time % 60)
+print("100% processed.")
 if minutes > 0:
-    print(f"100% processed in {minutes} minutes and {seconds} seconds.")
+    print(f"Process completed in {minutes} minutes and {seconds} seconds.")
 else:
-    print(f"100% processed completed in {seconds} seconds.")
+    print(f"Process completed in {seconds} seconds.")
 print("Video output successfuly saved to file.")
 
 out.release()
