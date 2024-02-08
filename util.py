@@ -43,6 +43,9 @@ br_int_to_char = {'0': 'A',
                     '9': 'J'}
 
 
+def clear():
+    os.system('clear')
+
 def write_csv(results, output_path):
     """
     Write the results to a CSV file.
@@ -58,6 +61,7 @@ def write_csv(results, output_path):
 
         for frame_nmr in results.keys():
             for car_id in results[frame_nmr].keys():
+                clear()
                 print(results[frame_nmr][car_id])
                 if 'car' in results[frame_nmr][car_id].keys() and \
                    'license_plate' in results[frame_nmr][car_id].keys() and \
@@ -258,6 +262,7 @@ def interpolate_bounding_boxes(data):
     for car_id in unique_car_ids:
 
         frame_numbers_ = [p['frame_nmr'] for p in data if int(float(p['car_id'])) == int(float(car_id))]
+        clear()
         print(frame_numbers_, car_id)
 
         # Filter data for a specific car ID

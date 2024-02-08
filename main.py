@@ -70,7 +70,7 @@ write_csv(results, os.path.join(data_path, './test.csv'))
 
 # add missing data
 # Load the CSV file
-with open(os.path.join(data_path, 'test.csv', 'r')) as file:
+with open(os.path.join(data_path, 'test.csv'), 'r') as file:
     reader = csv.DictReader(file)
     data = list(reader)
 

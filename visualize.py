@@ -4,10 +4,7 @@ import numpy as np
 import pandas as pd
 import time  # Import the time module
 from os import system
-
-
-def clear():
-    system('clear')
+from util import clear
 
 def rgb_to_bgr(rgb):
     return (rgb[2], rgb[1], rgb[0])
