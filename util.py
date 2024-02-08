@@ -5,7 +5,6 @@ import cv2
 
 import util
 from sort.sort import *
-from util import get_car, read_license_plate, write_csv
 import os
 
 import csv
@@ -213,7 +212,7 @@ def read_license_plate(license_plate_crop, country = 'UK'):
         text = text.upper().replace(' ', '')
 
         if license_complies_format(text):
-            return format_license(text, country), score
+            return format_license(text), score
 
     return None, None
 
