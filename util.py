@@ -71,6 +71,7 @@ def processing_animation(i):
     print(f"Processing license plates{'.' * j}")
     #time.sleep(0.4)
 
+
 def clear():
     os.system('clear')
 
