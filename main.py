@@ -5,6 +5,8 @@ data_path = choose_folder()
 results = {}
 mot_tracker = Sort()
 
+country = 'UK'
+
 # load models
 coco_model = YOLO('../models/yolov8n.pt')
 license_plate_detector = YOLO("../models/license_plate_detector.pt")
@@ -53,7 +55,7 @@ while ret:
                 _, license_plate_crop_thresh = cv2.threshold(license_plate_crop_gray, 64, 255, cv2.THRESH_BINARY_INV)
 
                 # read license plate number
-                license_plate_text, license_plate_text_score = read_license_plate(license_plate_crop_thresh)
+                license_plate_text, license_plate_text_score = read_license_plate(license_plate_crop_thresh, country)
 
                 if license_plate_text is not None:
                     results[frame_nmr][car_id] = {'car': {'bbox': [xcar1, ycar1, xcar2, ycar2]},
