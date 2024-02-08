@@ -122,11 +122,11 @@ while ret:
         
         
         clear()
-        print(f" {percent:.2f}% processed.")
+        print(f"{percent:.2f}%")
         if min > 0:
-            print(f"{min} minutes and {sec} seconds of the video left to process")
+            print(f"{min} minutes and {sec} seconds left to process")
         else:
-            print(f"{sec} seconds of the video left to process.")
+            print(f"{sec} seconds left to process.")
 clear()
 # Stop timing and print elapsed time
 elapsed_time = time.time() - start_time
