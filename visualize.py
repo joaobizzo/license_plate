@@ -14,7 +14,7 @@ def rgb_to_bgr(rgb):
 
 border_color = (116, 226, 145)
 
-rectangle_color = rgb_to_bgr(255, 0, 77)
+rectangle_color = rgb_to_bgr((255, 0, 77))
 
 
 def draw_border(img, top_left, bottom_right, color=(255, 0, 0), thickness=6, line_length_x=180, line_length_y=180):
