@@ -19,6 +19,17 @@ dict_int_to_char = {'0': 'O',
                     '6': 'G',
                     '5': 'S'}
 
+br_int_to_char = {'0': 'A',
+                    '1': 'B',
+                    '2': 'C',
+                    '3': 'D',
+                    '4': 'E',
+                    '5': 'F',
+                    '6': 'G',
+                    '7': 'H',
+                    '8': 'I',
+                    '9': 'J'}
+
 
 def write_csv(results, output_path):
     """
@@ -70,8 +81,8 @@ def license_complies_BR_format(text):
 
 
         BRAZILIAN LICENSE PLATE MODEL:
-         new = ABC1C34
-         old = ABC1234
+         new = ABC 1C34
+         old = ABC 1234
     """
     if len(text) != 7:
         return False
@@ -113,7 +124,7 @@ def license_complies_UK_format(text):
         return False
 
 
-def format_license(text):
+def format_license(text, country = 'UK'):
     """
     Format the license plate text by converting characters using the mapping dictionaries.
 
@@ -160,7 +171,7 @@ def read_license_plate(license_plate_crop, country = 'UK'):
         text = text.upper().replace(' ', '')
 
         if license_complies_format(text):
-            return format_license(text), score
+            return format_license(text, country), score
 
     return None, None
 
