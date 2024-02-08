@@ -350,8 +350,8 @@ def interpolate_bounding_boxes(data):
     return interpolated_data
 
 
-def write_unique_plates(data_path, df):
-    df = pd.read_csv(df)
+def write_unique_plates(data_path):
+    df = pd.read_csv(os.path.join(data_path, 'test_interpolated.csv'))
 
     # Group the data by car_id and find the plate with the highest score for each car
     max_score_plates = df.loc[df.groupby('car_id')['license_number_score'].idxmax()]
