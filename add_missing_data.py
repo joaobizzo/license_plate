@@ -1,6 +1,7 @@
 import csv
 import numpy as np
 from scipy.interpolate import interp1d
+import os
 
 
 def interpolate_bounding_boxes(data):
@@ -78,7 +79,7 @@ def interpolate_bounding_boxes(data):
 
 
 # Load the CSV file
-with open('test.csv', 'r') as file:
+with open(os.path.join(data_path, 'test.csv', 'r')) as file:
     reader = csv.DictReader(file)
     data = list(reader)
 
