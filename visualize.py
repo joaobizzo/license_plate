@@ -27,6 +27,13 @@ def draw_border(img, top_left, bottom_right, color=(255, 0, 0), thickness=6, lin
 
     return img
 
+
+def processing_animation():
+    for i in range(4):
+        os.system('clear')
+        print(f"Processing{'.' * i}")
+        time.sleep(0.5)
+
 # Load the data
 results = pd.read_csv('./test_interpolated.csv')
 
@@ -44,7 +51,6 @@ out = cv2.VideoWriter('../data/out.mp4', fourcc, fps, (width, height))
 seconds = round(frames / fps)
 
 license_plate = {}
-print("Processing license plates...")
 for car_id in np.unique(results['car_id']):
     max_ = np.amax(results[results['car_id'] == car_id]['license_number_score'])
     license_plate[car_id] = {
@@ -60,6 +66,7 @@ for car_id in np.unique(results['car_id']):
     license_crop = cv2.resize(license_crop, (int((x2 - x1) * 400 / (y2 - y1)), 400))
 
     license_plate[car_id]['license_crop'] = license_crop
+    processing_animation()
 
 
 

@@ -166,6 +166,7 @@ def read_license_plate(license_plate_crop, country = 'UK'):
 
 
 def get_car(license_plate, vehicle_track_ids):
+
     """
     Retrieve the vehicle coordinates and ID based on the license plate coordinates.
 
