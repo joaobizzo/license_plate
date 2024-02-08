@@ -20,14 +20,16 @@ dict_int_to_char = {'0': 'O',
                     '5': 'S'}
 
 br_int_to_char = {'0': 'A',
-                    '1': 'B',
+                  'O': 'A',
+                    '1': 'B', # 1 sometimes is I
                     '2': 'C',
                     '3': 'D',
                     '4': 'E',
                     '5': 'F',
+                    'S': 'F', # S is definitely 5
                     '6': 'G',
                     '7': 'H',
-                    '8': 'I',
+                    '8': 'I', # 8 is definitely I
                     '9': 'J'}
 
 
@@ -124,7 +126,7 @@ def license_complies_UK_format(text):
         return False
 
 
-def format_license(text, country = 'UK'):
+def format_license_UK_format(text):
     """
     Format the license plate text by converting characters using the mapping dictionaries.
 
@@ -137,6 +139,33 @@ def format_license(text, country = 'UK'):
     license_plate_ = ''
     mapping = {0: dict_int_to_char, 1: dict_int_to_char, 4: dict_int_to_char, 5: dict_int_to_char, 6: dict_int_to_char,
                2: dict_char_to_int, 3: dict_char_to_int}
+    for j in [0, 1, 2, 3, 4, 5, 6]:
+        if text[j] in mapping[j].keys():
+            license_plate_ += mapping[j][text[j]]
+        else:
+            license_plate_ += text[j]
+
+    return license_plate_
+
+
+def format_license_BR_format(text):
+    """
+    Format the license plate text by converting characters using the mapping dictionaries.
+
+    PLATES MODEL: 
+    ABC 1C34
+    ABC 1234
+    012 3456
+
+    Args:
+        text (str): License plate text.
+
+    Returns:
+        str: Formatted license plate text.
+    """
+    license_plate_ = ''
+    mapping = {0: dict_int_to_char, 1: dict_int_to_char, 2: dict_int_to_char, 3: dict_char_to_int, 4: br_int_to_char,
+               5: dict_char_to_int, 6: dict_char_to_int, 7: dict_char_to_int}
     for j in [0, 1, 2, 3, 4, 5, 6]:
         if text[j] in mapping[j].keys():
             license_plate_ += mapping[j][text[j]]
@@ -159,8 +188,10 @@ def read_license_plate(license_plate_crop, country = 'UK'):
 
     if country == 'BR':
         license_complies_format = license_complies_BR_format
+        format_license = format_license_BR_format
     elif country == 'UK':
         license_complies_format = license_complies_UK_format
+        format_license = format_license_UK_format
 
 
     detections = reader.readtext(license_plate_crop)
