@@ -60,7 +60,6 @@ def choose_folder():
         sys.exit(0)
 
 
-
 def clear():
     os.system('clear')
 

@@ -13,6 +13,7 @@ license_plate_detector = YOLO("../models/license_plate_detector.pt")
 # load video
 cap = cv2.VideoCapture(os.path.join(data_path, 'sample.mp4'))
 
+# see -> requirements/coco_names.txt
 vehicles = [2, 3, 5, 7]
 
 # read frames
