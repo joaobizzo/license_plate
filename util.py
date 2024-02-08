@@ -15,6 +15,8 @@ import sys
 import tkinter as tk
 from tkinter import filedialog
 
+import pandas as pd
+
 
 # Initialize the OCR reader
 reader = easyocr.Reader(['en'], gpu=False)
@@ -335,3 +337,18 @@ def interpolate_bounding_boxes(data):
             interpolated_data.append(row)
 
     return interpolated_data
+
+
+def write_unique_plates(data_path, df):
+    df = pd.read_csv(df)
+
+    # Group the data by car_id and find the plate with the highest score for each car
+    max_score_plates = df.loc[df.groupby('car_id')['license_number_score'].idxmax()]
+
+    # Get the unique plates with the highest score
+    unique_plates = max_score_plates['license_number'].unique()
+
+    # Save the unique plates to a text file with an index counting each obtained plate
+    with open(os.path.join(data_path, 'unique_plates.txt'), 'w') as file:
+        for i, plate in enumerate(unique_plates, 1):
+            file.write(f"{i}. {plate}\n")

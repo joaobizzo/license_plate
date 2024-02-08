@@ -81,3 +81,6 @@ with open(os.path.join(data_path, 'test_interpolated.csv'), 'w', newline='') as 
     writer = csv.DictWriter(file, fieldnames=header)
     writer.writeheader()
     writer.writerows(interpolated_data)
+
+# Save text with unique license plates
+write_unique_plates(data_path, interpolated_data)
