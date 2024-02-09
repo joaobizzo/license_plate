@@ -1,7 +1,7 @@
 from util import *
 
 
-data_path = input()
+data_path = choose_folder()
 
 
 def rgb_to_bgr(rgb):

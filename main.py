@@ -1,6 +1,7 @@
 from util import *
 
-data_path = input()
+
+data_path = choose_folder()
 
 results = {}
 mot_tracker = Sort()

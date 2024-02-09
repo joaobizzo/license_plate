@@ -2,7 +2,6 @@ import subprocess
 import time
 from util import choose_folder
 
-data_path = choose_folder()
 
 
 
@@ -18,9 +17,7 @@ def execute(command, input_data):
 for script in py_scripts:
     start_time = time.time()  # Start timer
     # Pass input data to the script (replace "your_input_data" with your actual input)
-    out, err = execute(f"python {script}", data_path)
+    out, err = execute(f"python {script}")
     elapsed_time = time.time() - start_time  # Calculate elapsed time
     print(f"Script {script} executed in {elapsed_time:.2f} seconds.")
-    print(out)
-    print(err)
     print("\n\n\n")
