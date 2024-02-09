@@ -6,7 +6,10 @@ data_path = choose_folder()
 results = {}
 mot_tracker = Sort()
 
-country = 'UK'
+if 'BR' in data_path:
+    country = 'BR'
+elif 'UK' in data_path:
+    country = 'UK'
 
 # load models
 coco_model = YOLO('../models/yolov8n.pt')
