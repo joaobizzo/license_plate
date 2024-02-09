@@ -86,4 +86,4 @@ with open(os.path.join(data_path, 'test_interpolated.csv'), 'w', newline='') as 
     writer.writerows(interpolated_data)
 
 # Save text with unique license plates
-write_unique_plates(data_path, interpolated_data)
+write_unique_plates(data_path)
